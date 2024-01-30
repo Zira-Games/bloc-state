@@ -112,7 +112,7 @@ export class QueryBloc<Data = unknown> extends Bloc<
     private closeSignal: Subject<QueryKey>
   ) {
     const name = `QueryBloc - ${options.name ?? options.queryKey}`;
-    super(state, name);
+    super(state, { name: name });
     this.revertedState = state;
     this.staleTime = options.staleTime ?? 0;
     this.logErrors = options.logErrors ?? false;

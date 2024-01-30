@@ -35,6 +35,16 @@ export type EventTransformer<Event> = (
   mapper: EventMapper<Event>
 ) => Observable<Event>;
 
+interface BlocOptions<Event> {
+  name?: string;
+  transformer?: EventTransformer<Event>;
+}
+
+interface FilterMapperPair {
+  filter: (event: any) => event is any;
+  mapper: (event: any) => Observable<any>;
+}
+
 /**
  * An abstract class representing a BLoC.
  *
@@ -47,11 +57,22 @@ export abstract class Bloc<Event, State> extends BlocBase<State> {
    *
    * @param state - The initial state of the BLoC.
    */
-  constructor(state: State, name?: string) {
-    super(state, name);
+  constructor(state: State, options?: BlocOptions<Event>) {
+    super(state, options?.name);
     this.on = this.on.bind(this);
     this.add = this.add.bind(this);
     this.emit = this.emit.bind(this);
+
+    this._globalTransformer = options?.transformer;
+    if (this._globalTransformer) {
+      const transformStream = this._globalTransformer(
+        this._eventSubject$,
+        (event: Event): Observable<Event> =>
+          this._eventStateMappers.find((p) => p.filter(event))!.mapper(event)
+      );
+      const subscriptions = transformStream.subscribe();
+      this.subscriptions.add(subscriptions);
+    }
   }
 
   /** An observable stream of BLoC events. */
@@ -61,6 +82,12 @@ export abstract class Bloc<Event, State> extends BlocBase<State> {
   private readonly _eventMap = new WeakSet<
     ClassType<Event> | AbstractClassType<Event>
   >();
+
+  /** A collection of stateMappers with their respective filters for each registerered handler. */
+  private readonly _eventStateMappers = new Array<FilterMapperPair>();
+
+  /** An event transformer to be applied to stream of all BloC events. */
+  private readonly _globalTransformer?: EventTransformer<Event>;
 
   /** A set of emitters for the state. */
   private readonly _emitters = new Set<EmitterImpl<State>>();
@@ -123,6 +150,11 @@ export abstract class Bloc<Event, State> extends BlocBase<State> {
   ): void {
     if (this._eventMap.has(event)) {
       throw new BlocError(`${event.name} can only have one EventHandler`);
+    }
+    if (this._globalTransformer && transformer) {
+      throw new Error(
+        `Can't provide a transformer for invididuals events along with a bloc-level event transformer`
+      );
     }
 
     if (this.hasAncestor(event, true)) {
@@ -207,18 +239,22 @@ export abstract class Bloc<Event, State> extends BlocBase<State> {
       });
     };
 
-    const _transformer = transformer ?? Bloc.transformer();
-
-    const transformStream$ = _transformer(
-      this._eventSubject$.pipe(
-        filter((newEvent): newEvent is T => newEvent instanceof event)
-      ),
-      mapEventToState
-    );
-
-    const subscription = transformStream$.subscribe();
-
-    this.subscriptions.add(subscription);
+    if (this._globalTransformer) {
+      this._eventStateMappers.push({
+        filter: (newEvent): newEvent is T => newEvent instanceof event,
+        mapper: mapEventToState,
+      });
+    } else {
+      const _transformer = transformer ?? Bloc.transformer();
+      const transformStream$ = _transformer(
+        this._eventSubject$.pipe(
+          filter((newEvent): newEvent is T => newEvent instanceof event)
+        ),
+        mapEventToState
+      );
+      const subscription = transformStream$.subscribe();
+      this.subscriptions.add(subscription);
+    }
   }
 
   private hasAncestor(
