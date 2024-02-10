@@ -69,8 +69,8 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8
       rxjs:
-        specifier: 7.8.0
-        version: 7.8.0
+        specifier: ^8.0.0-alpha.14
+        version: 8.0.0-alpha.14
       tslib:
         specifier: ^2.3.0
         version: 2.3.0
@@ -310,8 +310,8 @@ importers:
   packages/bloc:
     dependencies:
       rxjs:
-        specifier: ^7.8.0
-        version: 7.8.0
+        specifier: ^8.0.0-alpha.14
+        version: 8.0.0-alpha.14
     devDependencies:
       '@jacobtipp/state':
         specifier: workspace:*
@@ -324,8 +324,8 @@ importers:
         specifier: workspace:*
         version: link:../../dist/packages/bloc
       rxjs:
-        specifier: ^7.8.0
-        version: 7.8.0
+        specifier: ^8.0.0-alpha.14
+        version: 8.0.0-alpha.14
     publishDirectory: ../../dist/packages/bloc-concurrency
 
   packages/bloc-devtools:
@@ -334,8 +334,8 @@ importers:
         specifier: workspace:*
         version: link:../../dist/packages/bloc
       rxjs:
-        specifier: ^7.8.0
-        version: 7.8.0
+        specifier: ^8.0.0-alpha.14
+        version: 8.0.0-alpha.14
     publishDirectory: ../../dist/packages/bloc-devtools
 
   packages/bloc-query:
@@ -344,8 +344,8 @@ importers:
         specifier: workspace:*
         version: link:../../dist/packages/bloc
       rxjs:
-        specifier: ^7.8.0
-        version: 7.8.0
+        specifier: ^8.0.0-alpha.14
+        version: 8.0.0-alpha.14
     publishDirectory: ../../dist/packages/bloc-query
 
   packages/hydrated-bloc:
@@ -354,8 +354,8 @@ importers:
         specifier: workspace:*
         version: link:../../dist/packages/bloc
       rxjs:
-        specifier: ^7.8.0
-        version: 7.8.0
+        specifier: ^8.0.0-alpha.14
+        version: 8.0.0-alpha.14
     devDependencies:
       '@jacobtipp/state':
         specifier: workspace:*
@@ -374,8 +374,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       rxjs:
-        specifier: ^7.8.0
-        version: 7.8.0
+        specifier: ^8.0.0-alpha.14
+        version: 8.0.0-alpha.14
       use-disposable:
         specifier: ^1.0.2
         version: 1.0.2(@types/react-dom@18.2.6)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
@@ -397,8 +397,8 @@ importers:
         specifier: workspace:*
         version: link:../../dist/packages/bloc
       rxjs:
-        specifier: ^7.8.0
-        version: 7.8.0
+        specifier: ^8.0.0-alpha.14
+        version: 8.0.0-alpha.14
     devDependencies:
       '@jacobtipp/hydrated-bloc':
         specifier: workspace:*
@@ -15275,6 +15275,11 @@ packages:
     resolution: {integrity: sha512-F2+gxDshqmIub1KdvZkaEfGDwLNpPvk9Fs6LD/MyQxNgMds/WH9OdDDXOmxUZpME+iSK3rQCctkL0DYyytUqMg==}
     dependencies:
       tslib: 2.6.2
+    dev: true
+
+  /rxjs@8.0.0-alpha.14:
+    resolution: {integrity: sha512-oRCzFwbAMbo0+dVUeGUCCEf339mW7CESFvVDG3RTncD6yMtV2XoubFMpKEhBd2a9d04EpHl8QSz84/V/agG6bw==}
+    dev: false
 
   /safe-array-concat@1.0.1:
     resolution: {integrity: sha512-6XbUAseYE2KtOuGueyeobCySj9L4+66Tn6KQMOPQJrAJEowYKW/YR/MGJZl7FdydUdaFu4LYyDZjxf4/Nmo23Q==}

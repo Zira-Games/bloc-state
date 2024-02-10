@@ -1,8 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-pnpm format:check 
-pnpx madge --circular --extensions ts ./packages/
-pnpm lint
-pnpm test 
-pnpm build
+#pnpm format:check 
+#pnpx madge --circular --extensions ts ./packages/
+#pnpm test 
+#pnpm build

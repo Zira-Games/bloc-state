@@ -22,6 +22,6 @@
   "dependencies": {},
   "peerDependencies": {
     "@jacobtipp/bloc": "workspace:*",
-    "rxjs": "^7.8.0"
+    "rxjs": "^8.0.0-alpha.14"
   }
 }
