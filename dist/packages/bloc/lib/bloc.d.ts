@@ -40,7 +40,7 @@ export declare abstract class Bloc<Event, State> extends BlocBase<State> {
      */
     constructor(state: State, options?: BlocOptions<Event>);
     /** An observable stream of BLoC events. */
-    protected readonly _eventSubject$: Subject<Event>;
+    readonly _eventSubject$: Subject<Event>;
     /** A mapping of registered events to their corresponding handler. */
     private readonly _eventMap;
     /** A collection of stateMappers with their respective filters for each registerered handler. */
