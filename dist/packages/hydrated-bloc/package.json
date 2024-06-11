@@ -1,0 +1,30 @@
+{
+  "name": "@jacobtipp/hydrated-bloc",
+  "version": "4.0.3",
+  "main": "./index.js",
+  "private": false,
+  "sideEffects": false,
+  "license": "MIT",
+  "publishConfig": {
+    "directory": "../../dist/packages/hydrated-bloc",
+    "linkDirectory": true,
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "types": "./bloc-state/packages/hydrated-bloc/src/lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./bloc-state/packages/hydrated-bloc/src/lib/index.d.ts",
+      "import": "./index.mjs",
+      "require": "./index.js"
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@jacobtipp/state": "workspace:*"
+  },
+  "peerDependencies": {
+    "@jacobtipp/bloc": "workspace:*",
+    "rxjs": "^8.0.0-alpha.14"
+  }
+}

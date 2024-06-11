@@ -1,0 +1,25 @@
+{
+  "name": "@jacobtipp/state",
+  "version": "1.1.2",
+  "main": "./index.js",
+  "private": false,
+  "sideEffects": false,
+  "license": "MIT",
+  "publishConfig": {
+    "directory": "../../dist/packages/state",
+    "linkDirectory": true,
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.mjs",
+      "require": "./index.js"
+    }
+  },
+  "peerDependencies": {
+    "immer": "^9.0.18"
+  }
+}
