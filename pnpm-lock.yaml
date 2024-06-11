@@ -314,7 +314,7 @@ importers:
         version: 8.0.0-alpha.14
     devDependencies:
       '@jacobtipp/state':
-        specifier: workspace:*
+        specifier: ^1.1.2
         version: link:../../dist/packages/state
     publishDirectory: ../../dist/packages/bloc
 

@@ -21,7 +21,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@jacobtipp/state": "workspace:*"
+    "@jacobtipp/state": "^1.1.2"
   },
   "peerDependencies": {
     "rxjs": "^8.0.0-alpha.14"
